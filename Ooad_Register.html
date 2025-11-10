@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OOAD School Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+<style>
+:root{
+    --brand:#004aad;
+    --brand-dark:#003399;
+    --bg:#f4f6f8;
+    --text:#333;
+    --card:#fff;
+    --muted:#6b7280;
+}
+*{
+    box-sizing:border-box}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+}
+    /* .menu_bar {
+      background-color: var(--brand);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .menu_bar h2{ margin: 0; flex-grow: 1; }
+    .menu_bar nav a{
+      color: white;
+      text-decoration: none;
+      margin-left: 1rem;
+      font-family: 'Franklin Gothic Medium','Arial Narrow', Arial, sans-serif;
+    }
+    .menu_bar img { height: 64px; width: 64px; object-fit: contain; } */
+
+.container { 
+    max-width: 720px; 
+    margin: 2rem auto; 
+    padding: 2rem; 
+    background-color: var(--card); 
+    border-radius: 12px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,.08); 
+}
+h1 { 
+    text-align: center; 
+    margin-bottom: 1.25rem; 
+}
+label { 
+    display:block; 
+    margin:.5rem 0 .25rem; 
+    font-weight:600; 
+}
+input { 
+    width:100%; 
+    padding:.85rem; 
+    margin-bottom: .75rem; 
+    border:1px solid #d1d5db; 
+    border-radius:8px; 
+    font-size: .95rem; 
+}
+input:focus{ 
+    outline:2px solid var(--brand); 
+    border-color:transparent; 
+}
+.hint{ 
+    font-size:.85rem; 
+    color:var(--muted); 
+    margin-top:-.5rem; 
+    margin-bottom:.75rem; 
+}
+
+#role-buttons{ 
+    display:flex; 
+    flex-wrap:wrap; 
+    gap:.5rem; 
+    margin:.5rem 0 1rem; 
+}
+#role-buttons button{ 
+    padding:.7rem 1rem; 
+    border:none; 
+    cursor:pointer; 
+    border-radius:8px; 
+    background:#e5e7eb; 
+    font-weight:600; 
+}
+#role-buttons button:focus{ 
+    outline:2px solid var(--brand); 
+}
+#role-buttons .selected{ 
+    background-color:var(--brand); 
+    color:white; 
+}
+button[type="submit"], 
+    .btn{
+        width:100%;
+        padding:.9rem;
+        background-color:var(--brand);
+        color:white; 
+        border:none; 
+        border-radius:10px; 
+        cursor:pointer; 
+        font-weight:700;
+    }
+button[type="submit"]:hover, 
+    .btn:hover{ 
+        background-color:var(--brand-dark); 
+    }
+    .row{ display:grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 1rem; 
+    }
+    .hidden{ 
+        display:none !important; 
+    }
+/* Dashboard */
+#dashboard 
+.header{ 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    gap:1rem; 
+}
+#dashboard 
+h2{ 
+    margin:.5rem 0; 
+}
+.pill{ 
+    font-size:.85rem; 
+    color:white; 
+    background:var(--brand); 
+    padding:.25rem .5rem; 
+    border-radius:999px; 
+}
+.grid{ 
+    display:grid; 
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); 
+    gap:1rem; 
+    margin-top:1rem; 
+}
+.card{ 
+    background:var(--card); 
+    border:1px solid #e5e7eb; 
+    border-radius:12px; 
+    padding:1rem; 
+    box-shadow: 0 1px 3px rgba(0,0,0,.06); 
+}
+.card h3{ 
+    margin:.25rem 0 .5rem; 
+}
+.card p{ 
+    color:var(--muted); 
+    margin:.25rem 0 .75rem;
+}
+.card .actions{ 
+    display:flex; 
+    gap:.5rem; 
+    flex-wrap:wrap; 
+}
+.card .actions .btn-sm{ 
+    padding:.55rem .8rem; 
+    border:none; 
+    border-radius:8px; 
+    cursor:pointer; 
+    background:#e5e7eb; 
+
+}
+.card .actions .btn-sm.primary{ 
+    background:var(--brand); 
+    color:white; 
+}
+.topbar{ 
+    display:flex; 
+    gap:.5rem; 
+    align-items:center; 
+}
+.topbar .btn-outline{ 
+    background:#fff; 
+    color:var(--brand); 
+    border:1px solid var(--brand); 
+    width:auto; 
+}
+.divider{ 
+    height:1px; 
+    background:#e5e7eb; 
+    margin:1rem 0; 
+}
+.muted{ 
+    color:var(--muted); 
+}
+.menu_bar {
+    background-color: var(--brand);
+}
+
+#dashboard .header {
+    background-color: white;
+    color: var(--text);
+}
+
+</style>
+</head>
+<body>
+ <!-- HEADER -->
+<header class="header">
+    <div class="menu_bar">
+        <img src="logo.png" alt="OOAD School Management Logo" class="logo">
+        <h2>OOAD School Management</h2>
+        <!-- Desktop Nav -->
+        <base href="/ooad/">
+        <nav class="nav desktop-nav">
+            <a href="./index.html">Home</a>
+            <a href="./Ooad_Register.html">Register</a>
+            <a href="./us.html">About Us</a>
+        </nav>
+
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu-btn" id="menuToggle" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE SIDEBAR NAV -->
+<div class="sidebar" id="sidebar">
+    <nav class="nav">
+        <a href="./index.html">Home</a>
+        <a href="./Ooad_Register.html">Register</a>
+        <a href="./us.html">About Us</a>
+    </nav>
+</div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+
+  <!-- Register Container -->
+  <div class="container" id="register-container" aria-labelledby="register-heading">
+    <h1 id="register-heading">Register</h1>
+    <form id="registerForm" novalidate>
+      <label>Register as:</label>
+      <div id="role-buttons" role="group" aria-label="Role selector">
+        <button type="button" data-role="student" aria-pressed="false">Student</button>
+        <button type="button" data-role="teacher" aria-pressed="false">Teacher</button>
+        <button type="button" data-role="admin" aria-pressed="false">Admin</button>
+      </div>
+
+      <input type="hidden" id="role" name="role" required>
+
+      <div class="row">
+        <div>
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter full name" autocomplete="name" required />
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter email" autocomplete="email" required />
+        </div>
+      </div>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" autocomplete="new-password" required />
+      <div class="hint" id="pwd-hint">Password must be at least 6 characters.</div>
+
+      <div id="extraFields"></div>
+
+      <button type="submit" id="registerBtn">Register</button>
+    </form>
+  </div>
+
+  <!-- Dashboard Container (hidden initially) -->
+  <div class="container hidden" id="dashboard" aria-live="polite"></div>
+
+   <footer class="footer">
+    <div class="footer-bottom">
+      <div class="footer-container">
+        <div class="footer-col"><h3>OOAD</h3><p>© 2025</p></div>
+
+        <div class="footer-col">
+          <h4>Customers</h4>
+          <ul><li><a href="#">Professors</a></li><li><a href="#">Students</a></li></ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul><li><a href="#">About us</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact us</a></li></ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Further Information</h4>
+          <ul><li><a href="#">Terms & Conditions</a></li><li><a href="#">Privacy Policy</a></li></ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Follow us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-medium"></i></a>
+            <a href="#"><i class="fas fa-paper-plane"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+  <script>
+    (function(){
+      // --- Simple state ---
+      const state = {
+        role: '',
+        name: '',
+        email: ''
+      };
+
+      // --- Role-specific config to render cards/actions dynamically ---
+      const ROLE_UI = {
+        student: {
+          title: 'Student Dashboard',
+          intro: 'Quick access to your classes, grades, and resources.',
+          widgets: [
+            { icon: '📝', title: 'Assignments', text: 'View and submit assignments.', actions: ['View Assignments','Submit Work'] },
+            { icon: '📚', title: 'Courses', text: 'Browse enrolled courses.', actions: ['My Courses','Find Materials'] },
+            { icon: '📊', title: 'Grades', text: 'Track your performance.', actions: ['View Grades'] },
+          ]
+        },
+        teacher: {
+          title: 'Teacher Dashboard',
+          intro: 'Manage classes, assignments, and student progress.',
+          widgets: [
+            { icon: '🧑‍🏫', title: 'Classes', text: 'Create and manage classes.', actions: ['Create Class','Manage Roster'] },
+            { icon: '🧩', title: 'Assignments', text: 'Publish and review assignments.', actions: ['New Assignment','Review Submissions'] },
+            { icon: '📈', title: 'Analytics', text: 'Monitor class performance.', actions: ['Open Analytics'] },
+          ]
+        },
+        admin: {
+          title: 'Admin Dashboard',
+          intro: 'System configuration, user roles, and reports.',
+          widgets: [
+            { icon: '👥', title: 'Users', text: 'Create, edit, or remove users.', actions: ['Add User','Manage Roles'] },
+            { icon: '🏫', title: 'Departments', text: 'Maintain departments and programs.', actions: ['New Department','Edit Structure'] },
+            { icon: '🧾', title: 'Reports', text: 'Operational and audit reports.', actions: ['Generate Report'] },
+          ]
+        }
+      };
+
+      // --- Elements ---
+      const roleHidden = document.getElementById('role');
+      const roleButtonsWrap = document.getElementById('role-buttons');
+      const extraFields = document.getElementById('extraFields');
+      const form = document.getElementById('registerForm');
+      const registerContainer = document.getElementById('register-container');
+      const dashboard = document.getElementById('dashboard');
+      const pwdHint = document.getElementById('pwd-hint');
+
+      // --- Helpers ---
+      const $el = (tag, attrs={}, children=[])=>{
+        const el = document.createElement(tag);
+        Object.entries(attrs).forEach(([k,v])=>{
+          if(k==='class') el.className = v; else if(k==='text') el.textContent=v; else el.setAttribute(k,v);
+        });
+        children.forEach(c=>{
+          if(typeof c === 'string') el.appendChild(document.createTextNode(c)); else if(c) el.appendChild(c);
+        });
+        return el;
+      };
+
+      const validate = () => {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        let ok = true;
+        if(!state.role){ ok = false; }
+        if(name.length < 2){ ok = false; }
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ ok = false; }
+        if(password.length < 6){ ok = false; }
+        return ok;
+      };
+
+      const renderExtraFields = (role) => {
+        extraFields.innerHTML = '';
+        if(role === 'student'){
+          extraFields.append(
+            $el('label',{for:'department', text:'Department:'}),
+            $el('input',{id:'department', name:'department', placeholder:'Enter department', required:''}),
+            $el('label',{for:'studentId', text:'Student ID:'}),
+            $el('input',{id:'studentId', name:'studentId', placeholder:'Enter student ID', required:''}),
+          );
+        } else if(role === 'teacher'){
+          extraFields.append(
+            $el('label',{for:'teacherId', text:'Teacher ID:'}),
+            $el('input',{id:'teacherId', name:'teacherId', placeholder:'Enter teacher ID', required:''}),
+          );
+        } else if(role === 'admin'){
+          extraFields.append(
+            $el('label',{for:'adminID', text:'Admin ID:'}),
+            $el('input',{id:'adminID', name:'adminID', placeholder:'Enter admin ID', required:''}),
+          );
+        }
+      };
+
+      const setRole = (role, btn) => {
+        state.role = role;
+        roleHidden.value = role;
+        roleButtonsWrap.querySelectorAll('button').forEach(b=>{
+          b.classList.toggle('selected', b===btn);
+          b.setAttribute('aria-pressed', b===btn ? 'true':'false');
+        });
+        renderExtraFields(role);
+      };
+
+      // Render Dashboard dynamically
+      const renderDashboard = ({ role, name }) => {
+        const cfg = ROLE_UI[role];
+        dashboard.innerHTML = '';
+
+        const header = $el('div',{class:'header'},[
+          $el('div',{},[
+            $el('div',{class:'pill'},[role.toUpperCase()]),
+            $el('h2',{text:`Welcome, ${name}!`}),
+            $el('div',{class:'muted', text: cfg.intro})
+          ]),
+          $el('div',{class:'topbar'},[
+            $el('button',{class:'btn btn-outline', type:'button', id:'btn-back', text:'← Back to Register'}),
+            $el('button',{class:'btn', type:'button', id:'btn-logout', text:'Log out'})
+          ])
+        ]);
+
+        const grid = $el('div',{class:'grid'});
+        cfg.widgets.forEach(w=>{
+          const card = $el('div',{class:'card'},[
+            $el('div',{class:'muted', text:w.icon}),
+            $el('h3',{text:w.title}),
+            $el('p',{text:w.text}),
+          ]);
+          const actions = $el('div',{class:'actions'});
+          w.actions.forEach((act,i)=>{
+            const btn = $el('button',{class:`btn-sm ${i===0 ? 'primary':''}`, type:'button', text:act});
+            btn.addEventListener('click',()=>{
+              alert(`${act} clicked (demo)`);
+            });
+            actions.appendChild(btn);
+          });
+          card.appendChild(actions);
+          grid.appendChild(card);
+        });
+
+        dashboard.append(header, $el('div',{class:'divider'}), grid);
+
+        // wire actions
+        dashboard.querySelector('#btn-back').addEventListener('click', ()=>{
+          dashboard.classList.add('hidden');
+          registerContainer.classList.remove('hidden');
+          // keep role selected; user can edit
+        });
+        dashboard.querySelector('#btn-logout').addEventListener('click', ()=>{
+          // Clear simple state
+          form.reset();
+          roleHidden.value = '';
+          state.role = '';
+          roleButtonsWrap.querySelectorAll('button').forEach(b=>{ b.classList.remove('selected'); b.setAttribute('aria-pressed','false'); });
+          extraFields.innerHTML = '';
+          dashboard.classList.add('hidden');
+          registerContainer.classList.remove('hidden');
+        });
+      };
+
+      // --- Events ---
+      roleButtonsWrap.addEventListener('click', (e)=>{
+        const btn = e.target.closest('button[data-role]');
+        if(!btn) return;
+        setRole(btn.dataset.role, btn);
+      });
+
+      // keyboard support for role selection (ArrowLeft/Right)
+      roleButtonsWrap.addEventListener('keydown',(e)=>{
+        const keys = ['ArrowLeft','ArrowRight'];
+        if(!keys.includes(e.key)) return;
+        const buttons = Array.from(roleButtonsWrap.querySelectorAll('button[data-role]'));
+        const idx = buttons.findIndex(b=>b.classList.contains('selected'));
+        let next = 0;
+        if(idx === -1){ next = 0; }
+        else if(e.key==='ArrowRight'){ next = (idx+1) % buttons.length; }
+        else { next = (idx-1+buttons.length)%buttons.length; }
+        setRole(buttons[next].dataset.role, buttons[next]);
+        buttons[next].focus();
+      });
+
+      // live password hint
+      document.getElementById('password').addEventListener('input', (e)=>{
+        const len = e.target.value.length;
+        pwdHint.textContent = len < 6 ? 'Password must be at least 6 characters.' : 'Looks good!';
+      });
+
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        if(!validate()){
+          alert('Please fill in all fields correctly and select a role.');
+          return;
+        }
+        state.name = document.getElementById('name').value.trim();
+        state.email = document.getElementById('email').value.trim();
+
+        // Switch view to dashboard instead of redirecting
+        registerContainer.classList.add('hidden');
+        dashboard.classList.remove('hidden');
+        renderDashboard({ role: state.role, name: state.name });
+      });
+
+      // --- SPA-style navigation (no page reload)
+      const navTo = (page) => {
+        if (page === 'home' || page === 'register') {
+          dashboard.classList.add('hidden');
+          registerContainer.classList.remove('hidden');
+        } else if (page === 'dashboard') {
+          registerContainer.classList.add('hidden');
+          dashboard.classList.remove('hidden');
+        } else if (page === 'about') {
+          alert('About Us (SPA stub) — add an About section to this file or navigate to a separate page.');
+        }
+        try { history.replaceState(null, '', `#/${page}`); } catch(_) {}
+      };
+
+      // Initialize route from hash
+      const initRoute = () => {
+        const route = (location.hash || '#/register').replace('#/','');
+        navTo(route);
+      };
+      window.addEventListener('hashchange', initRoute);
+      initRoute();
+
+      // Menu handlers
+      document.getElementById('nav-home').addEventListener('click', (e)=>{ e.preventDefault(); navTo('home'); });
+      document.getElementById('nav-register').addEventListener('click', (e)=>{ e.preventDefault(); navTo('register'); });
+      document.getElementById('nav-about').addEventListener('click', (e)=>{ e.preventDefault(); navTo('about'); });
+    })();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

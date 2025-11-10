@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OOAD School Management</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="menu_bar">
+      <img src="logo.png" alt="OOAD School Management Logo" class="logo">
+      <h2>OOAD School Management</h2>
+      <!-- Desktop Nav -->
+      <nav class="nav desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="Ooad_Register.html">Register</a>
+        <a href="us.html">About Us</a>
+      </nav>
+      <!-- Mobile Menu Button -->
+      <div class="mobile-menu-btn" id="menuToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE SIDEBAR NAV -->
+  <div class="sidebar" id="sidebar">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Ooad_Register.html">Register</a>
+      <a href="us.html">About Us</a>
+    </nav>
+  </div>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content home-hero">
+    <h1>Welcome to OOAD School Management System</h1>
+    <p>Your one-stop solution for managing school operations efficiently.</p>
+    <button onclick="location.href='Ooad_Register.html'" class="cta-main-btn">Get Started</button>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="cta-box">
+      <div class="cta-content">
+        <div class="cta-text">
+          <h2>Contact us if you want to Daj Yub -_-</h2>
+          <p>Let's get started!</p>
+        </div>
+        <a href="#" class="cta-btn">Contact us</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-container">
+        <div class="footer-col"><h3>OOAD</h3><p>© 2025</p></div>
+
+        <div class="footer-col">
+          <h4>Customers</h4>
+          <ul><li><a href="#">Professors</a></li><li><a href="#">Students</a></li></ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul><li><a href="#">About us</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact us</a></li></ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Further Information</h4>
+          <ul><li><a href="#">Terms & Conditions</a></li><li><a href="#">Privacy Policy</a></li></ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Follow us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-medium"></i></a>
+            <a href="#"><i class="fas fa-paper-plane"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+  <!-- SCRIPTS -->
+  <script src="script.js">
+    function goHome() {
+  // replace the last path segment with index.html
+  location.href = location.pathname.replace(/[^/]*$/, 'index.html');
+}
+  </script>
+</body>
+</html>
